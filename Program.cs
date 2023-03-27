@@ -1,93 +1,83 @@
 // using System;
 
-// public class Program
+// class Program
 // {
-//     public static void Main()
+//     static void Main()
 //     {
-//         int m = 3; 
-//         int n = 4; 
+//         Console.Write("Введите значение N: ");
+//         int n = int.Parse(Console.ReadLine());
 
-       
-//         double[,] arr = new double[m, n];
+//         PrintNumbers(n);
+//     }
 
-        
-//         Random rand = new Random();
-//         for (int i = 0; i < m; i++)
+//     static void PrintNumbers(int n)
+//     {
+//         if (n == 1)
 //         {
-//             for (int j = 0; j < n; j++)
-//             {
-//                 double randNum = rand.NextDouble() * 20 - 10; 
-//                 arr[i, j] = Math.Round(randNum, 2); 
-//             }
+//             Console.Write("1");
 //         }
-
-//         for (int i = 0; i < m; i++)
+//         else
 //         {
-//             for (int j = 0; j < n; j++)
-//             {
-//                 Console.Write(arr[i, j] + " ");
-//             }
-//             Console.WriteLine();
+//             Console.Write("{0}, ", n);
+//             PrintNumbers(n - 1);
 //         }
 //     }
 // }
-
 // using System;
 
-// public class Program
+// class Program
 // {
-//     public static void Main()
+//     static void Main()
 //     {
-//         int[] arr = new int[4];
+//         Console.Write("Введите значение M: ");
+//         int m = int.Parse(Console.ReadLine());
 
-        
-//         Random rand = new Random();
-//         for (int i = 0; i < arr.Length; i++)
-//         {
-//             arr[i] = rand.Next(-100, 100); 
-//         }
+//         Console.Write("Введите значение N: ");
+//         int n = int.Parse(Console.ReadLine());
 
-        
+//         int sum = SumNumbers(m, n);
+//         Console.WriteLine("Сумма натуральных чисел от {0} до {1}: {2}", m, n, sum);
+//     }
+
+//     static int SumNumbers(int m, int n)
+//     {
 //         int sum = 0;
-//         for (int i = 1; i < arr.Length; i += 2) 
+//         for (int i = m; i <= n; i++)
 //         {
-//             sum += arr[i];
+//             sum += i;
 //         }
-
-        
-//         Console.WriteLine("Массив: " + string.Join(", ", arr));
-//         Console.WriteLine("Сумма элементов, стоящих на нечетных позициях: " + sum);
+//         return sum;
 //     }
 // }
-
 using System;
 
-public class Program
+class Program
 {
-    public static void Main()
+    static void Main()
     {
-        double[] arr = { 3.2, 7.5, 22.1, 2.7, 78.9 }; 
+        Console.Write("Введите значение m: ");
+        int m = int.Parse(Console.ReadLine());
 
-        
-        double max = arr[0];
-        double min = arr[0];
-        for (int i = 1; i < arr.Length; i++)
+        Console.Write("Введите значение n: ");
+        int n = int.Parse(Console.ReadLine());
+
+        int result = Ackermann(m, n);
+        Console.WriteLine("A({0}, {1}) = {2}", m, n, result);
+    }
+
+    static int Ackermann(int m, int n)
+    {
+        if (m == 0)
         {
-            if (arr[i] > max)
-            {
-                max = arr[i];
-            }
-            if (arr[i] < min)
-            {
-                min = arr[i];
-            }
+            return n + 1;
         }
-
-        
-        double diff = max - min;
-
-        
-        Console.WriteLine("Массив: " + string.Join(", ", arr));
-        Console.WriteLine("Разница между максимальным и минимальным элементами: " + diff);
+        else if (n == 0)
+        {
+            return Ackermann(m - 1, 1);
+        }
+        else
+        {
+            return Ackermann(m - 1, Ackermann(m, n - 1));
+        }
     }
 }
